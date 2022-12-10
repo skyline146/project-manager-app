@@ -1,0 +1,46 @@
+@import '../../helpers/style/variables.scss';
+
+.rootWrapper {
+    width: 100%;
+}
+
+.tableHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    > div {
+        user-select: none;
+        width: 230px;
+        height: 80px;
+        background-color: $card-background;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        > p {
+            text-transform: capitalize;
+            font-family: $font;
+            font-size: 30px;
+        }
+    }
+}
+
+.tasksTable {
+    // width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    // grid-template-columns: 1fr;
+    // row-gap: 30px;
+    border: 2px dashed $card-background;
+    padding: 15px 15px;
+    border-radius: 20px;
+    transition: 0.3s;
+    min-height: 200px;
+}
+
+.tasksTableDrag {
+    background-color: rgba(255, 171, 53, 0.225);
+}

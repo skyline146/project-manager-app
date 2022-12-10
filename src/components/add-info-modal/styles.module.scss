@@ -1,0 +1,163 @@
+@import '../../helpers/style/variables.scss';
+
+.modal-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+.modal-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+    }
+.modal-exit {
+    opacity: 1;
+}
+.modal-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.modalWrapper {
+    position: fixed;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.337);
+}
+
+.modalWindow {
+    background-color: $card-background;
+    overflow: hidden;
+    border-radius: 20px;
+    transition: 0.3s;
+    min-height: 250px;
+    width: 700px;
+    box-shadow: 0 0 20px rgb(180, 93, 0);
+    animation: show-modal 0.4s;
+}
+
+@keyframes show-modal {
+    0% {transform: scale(0.8); opacity: 0;}
+    100% {transform: scale(1); opacity: 1;}
+}
+
+.modalHeader {
+    background-color: rgb(39, 39, 39);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    > p {
+        color: $font-color;
+        font-family: $font;
+        font-size: 24px;
+        text-transform: uppercase;
+    }
+    > div {
+        position: relative;
+        height: 30px;
+        &::before {
+            content: "";
+            left: 0;
+            position: absolute;
+            transition: all 0.2s;
+            box-shadow: none;
+            width: 30px;
+            height: 30px;
+            // border-radius: 50%;
+        }
+        // &:hover {
+        //     &::before {
+        //         background-color: rgb(0, 255, 247);
+        //         box-shadow: 0px 0px 15px rgb(0, 255, 247);
+        //     }
+        // }
+        > img {
+            position: relative;
+            cursor: pointer;
+            height: 30px;
+            width: 30px;
+            transition: 0.2s;
+            // &:hover {
+            //     box-shadow: 0 10px 10px rgb(0, 191, 255);
+            // }
+        }
+    }
+}
+
+.addForm {
+    display: flex;
+    flex-direction: column;
+    > label {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-family: $font;
+        color: $font-color;
+        font-size: 22px;
+        padding: 20px 0 0 20px;
+        > input {
+            color: $font-color;
+            background-color: transparent;
+            font-family: $font;
+            font-size: 20px;
+            width: 400px;
+            height: 30px;
+            border: none;
+            outline: none;
+            border-bottom: 2px solid black;
+        }
+    }
+}
+
+.descrBox {
+    resize: vertical;
+    width: 95%;
+    outline: none;
+    padding: 5px 5px 5px 5px;
+    min-height: 200px;
+    font-family: $font;
+    background-color: $card-background;
+    font-size: 18px;
+    margin: 15px 15px 0 0;
+    border-radius: 5px;
+    border: 2px solid black;
+    max-height: 400px;
+    color: $font-color;
+}
+
+.errorMessageBlock {
+    display: flex;
+    padding-left: 20px;
+    > p {
+        color: rgb(194, 1, 1);
+        font-family: $font;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 10px 0 0 0;
+    }
+}
+
+.formButton {
+    align-self: center;
+    margin: 20px 0 20px 0;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    font-family: $font;
+    color: $font-color;
+    font-size: 18px;
+    background-color: $card-background;
+    transition: 0.2s;
+    &:hover {
+        background-color: #252525;
+        cursor: pointer;
+    }
+    &:focus {
+        background-color: #252525;
+    }
+}

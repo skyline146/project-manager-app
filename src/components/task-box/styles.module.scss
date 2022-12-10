@@ -1,0 +1,104 @@
+@import '../../helpers/style/variables.scss';
+
+.rootWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $card-background;
+    max-width: 100%;
+    margin-bottom: 30px;
+    min-height: 200px;
+    border-radius: 20px;
+    padding: 20px 20px 10px 20px;
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 0px 15px $box-shadow;
+    }
+    &:active {
+        box-shadow: 0px 0px 15px $box-shadow;
+    }
+
+    > p {
+        margin-top: -20px;
+        font-family: $font;
+        font-size: 18px;
+        text-align: left;
+        color: $font-color;
+    }
+}
+
+.taskHeader {
+    display: flex;
+    justify-content: space-between;
+    > p {
+        font-family: $font;
+        font-size: 26px;
+        margin: 0;
+        color: $font-color;
+    }
+}
+
+.deleteButtonWrapper {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    display: flex;
+    align-items: center;
+}
+
+.deleteButton {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(233, 89, 89);
+    border-radius: 50px;
+    transition: 0.2s;
+    &::before {
+        content: attr(data-title);
+        position: absolute;
+        top: -70px;
+        width: 100px;
+        padding: 5px 10px 5px 10px;
+        height: 50px;
+        background-color: rgb(39, 39, 39);
+        box-shadow: 0 0 20px rgb(0, 191, 255);
+        border-radius: 5px;
+        transition: 0.2s;
+        opacity: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-family: $font;
+        color: $font-color;
+    }
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 -15px 20px rgb(0, 191, 255);
+        &::before {
+            display: flex;
+            opacity: 1;
+        }
+    }
+    > img {
+        pointer-events: none;
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.taskDate {
+    align-self: flex-end;
+    user-select: none;
+    > p {
+        overflow-wrap: break-word;
+        font-family: $font;
+        color: $font-color;
+        font-size: 14px;
+        margin-bottom: 0;
+        text-align: left;
+    }
+}

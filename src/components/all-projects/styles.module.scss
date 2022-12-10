@@ -1,0 +1,31 @@
+.projectsTable {
+    max-width: 1500px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 30px;
+    margin-bottom: 50px;
+    // justify-content: center;
+    transition: all 0.3s;
+}
+
+.item-enter {
+    opacity: 0;
+  }
+.item-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+.item-exit {
+    opacity: 1;
+}
+.item-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+}
+
+@media (max-width: 1200px) {
+    .projectsTable {
+        grid-template-columns: 1fr;
+    } 
+}

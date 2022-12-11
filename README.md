@@ -25,3 +25,7 @@ For now data stores in local storage. But in future there will be login page wit
 ### v1.0
 
 Added projects slice with redux. There is opportunity to create and delete projects and tasks. All data saves in local storage.
+
+### v1.1
+
+Added column highlight when dragging tasks.

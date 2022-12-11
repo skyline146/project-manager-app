@@ -8,7 +8,7 @@ Page that shows all your projects. After choosing any project you will be redire
 
 ### Tasks page
 
-Page that have 3 columns: Queue, Development and Done. There you can create new task and move it in between columns and change order.
+Page that have 3 columns: Queue, Development and Done. There you can create new task and move it between columns and change order.
 
 ### Used technologies and libraries:
 
@@ -37,3 +37,7 @@ Updated projects interface, added columns in projects slice.
 ### v1.3
 
 Added opportunity to change tasks order in column.
+
+### v1.4
+
+Added opportunity to move task status between columns and project status check.

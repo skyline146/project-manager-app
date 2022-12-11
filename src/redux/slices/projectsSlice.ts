@@ -6,30 +6,6 @@ export interface ProjectsState {
   projects: ProjectInterface [],
 }
 
-// projects: [
-//   {
-//     id: "",
-//     title: "",
-//     description: "",
-//     status: "",
-//     createdAt: ["", ""],
-//     columns: {
-//       'queue': {
-//         id: 'queue',
-//         tasks: []
-//       },
-//       'development': {
-//         id: 'development',
-//         tasks: []
-//       },
-//       'done': {
-//         id: 'done',
-//         tasks: []
-//       },
-//     }
-//   }
-// ],
-
 const initialState: ProjectsState = {
     projects: [],
 }
@@ -72,7 +48,15 @@ export const projectsSlice = createSlice({
       //delete task in project
       currentProject.columns[columnId].tasks = currentProject.columns[columnId].tasks.filter(task => task.id !== taskId);
 
-      if (currentProject.columns['queue'].tasks.length === 0 && currentProject.columns['development'].tasks.length === 0 && currentProject.columns['done'].tasks.length === 0) {
+      //check if tasks exist in 'done' column
+      if (currentProject.columns['done'].tasks.length) {
+        if (currentProject.columns['queue'].tasks.length === 0 && currentProject.columns['development'].tasks.length === 0) {
+          currentProject.status = 'done';
+        } else  {
+          currentProject.status = 'progress';
+        }
+        
+      } else {
         currentProject.status = 'progress';
       }
 
@@ -84,17 +68,17 @@ export const projectsSlice = createSlice({
       const {projectId, taskId, oldStatus, newStatus, oldIndex, newIndex} = action.payload;
       
       const currentProject = state.projects.filter(project => project.id === projectId)[0];
+      const task = currentProject.columns[oldStatus].tasks.filter(task => task.id === taskId)[0];
       
-      //update task status
-      
+      //delete task from previous column
+      currentProject.columns[oldStatus].tasks.splice(oldIndex, 1);
 
-      let doneTasks = 0;
+      //add task in new column with right position
+      currentProject.columns[newStatus].tasks.splice(newIndex, 0, task);
 
-      //counting of done tasks
-      // currentProject.tasks.map(task => task.status === 'done' ? doneTasks++ : doneTasks);
-      
       //check if all tasks in project have done
-      // (currentProject.tasks.length === doneTasks) ? currentProject.status = 'done' : currentProject.status = 'progress';
+      (currentProject.columns['done'].tasks.length && currentProject.columns['queue'].tasks.length === 0 && currentProject.columns['development'].tasks.length === 0) ? 
+      currentProject.status = 'done' : currentProject.status = 'progress';
 
       updateLocalStorage(state.projects);
     },

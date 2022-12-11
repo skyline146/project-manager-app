@@ -96,6 +96,8 @@
         box-shadow: 0 0 20px rgb(0, 191, 255);
         border-radius: 5px;
         display: none;
+        justify-content: center;
+        align-items: center;
         color: $font-color;
     }
     &:hover {
@@ -103,9 +105,8 @@
         transform: scale(1.03);
         box-shadow: 0 -15px 20px rgb(0, 191, 255);
         &::before {
+            animation: show-button-title 0.2s;
             display: flex;
-            justify-content: center;
-            align-items: center;
         }
     }
     > img {
@@ -113,6 +114,11 @@
         width: 25px;
         height: 25px;
     }
+}
+
+@keyframes show-button-title {
+    0% {transform: scale(0.8); opacity: 0;}
+    100% {transform: scale(1); opacity: 1;}
 }
 
 .projectDate {

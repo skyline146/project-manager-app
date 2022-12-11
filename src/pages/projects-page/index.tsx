@@ -44,7 +44,7 @@ export const ProjectsPage = () => {
             {showModal ? <AddInfoModal type='project' closeModal={() => setShowModal(false)} addInfo={(title:string, descr:string) => addNewProject(title, descr)}/> : null}
             <section className={styles.rootWrapper}>
                 <div className={styles.header}>
-                    <p className={styles.projectsCount}>You have <span>{`${projects.length}`}</span> active projects.</p>
+                    <p className={styles.projectsCount}>You have <span>{`${projects.length}`}</span> active {projects.length === 1 ? 'project' : 'projects'}.</p>
                     <p onClick={() => setShowModal(true)} className={styles.projectsCount}><img src={IconsEnum.ADD_ICON} alt='add'/>Add new project</p>
                 </div>
                 {

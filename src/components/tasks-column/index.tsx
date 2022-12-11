@@ -8,10 +8,9 @@ import styles from './styles.module.scss';
 interface ITasksColumnProps {
     type: string,
     tasks: TaskInterface [],
-    isDragging: boolean
 }
 
-export const TasksColumn = ({type, tasks, isDragging}:ITasksColumnProps) => {
+export const TasksColumn = ({type, tasks}:ITasksColumnProps) => {
     let textColor = '';
 
     switch(type) {
@@ -33,7 +32,7 @@ export const TasksColumn = ({type, tasks, isDragging}:ITasksColumnProps) => {
 
     return (
         <Droppable droppableId={type}>
-            {(provided) => (
+            {(provided, snapshot) => (
                 <div className={styles.rootWrapper}>
                     <div className={styles.tableHeader}>
                         <div>
@@ -41,7 +40,7 @@ export const TasksColumn = ({type, tasks, isDragging}:ITasksColumnProps) => {
                         </div>
                     </div>
                     <div 
-                        className={isDragging ? stylesJoint(styles.tasksTable, styles.tasksTableDrag) : styles.tasksTable}
+                        className={snapshot.isDraggingOver ? stylesJoint(styles.tasksTable, styles.tasksTableDrag) : styles.tasksTable}
                         ref={provided.innerRef} 
                         {...provided.droppableProps}>
                         {tasks?.map((task, index) => {

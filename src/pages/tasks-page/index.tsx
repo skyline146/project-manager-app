@@ -18,7 +18,6 @@ import styles from './styles.module.scss';
 export const TasksPage = () => {
     const { projectId } = useParams();
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [isDragging, setDragging] = useState<boolean>(false);
     const [project] = useSelector((state: RootState) => state.projects.projects.filter(item => item.id === projectId));
     const tasks = project?.tasks ?? [];
     const columns = useSelector((state: RootState) => state.columns.columns);
@@ -51,7 +50,6 @@ export const TasksPage = () => {
         const { destination, draggableId, source } = result;
 
         if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
-            setDragging(false);
             return;
         }
 
@@ -60,16 +58,11 @@ export const TasksPage = () => {
         const oldIndex: number = source.index;
         const newIndex: number = destination.index;
 
-        // console.log(newTasks);
-        // dispatch(updateTasksOrder({projectId, newTasks}));
-
         if (source.droppableId !== newStatus) {
             dispatch(updateTaskStatus({projectId, taskId, newStatus, newIndex}));
         } else {
             dispatch(updateColumnOrder({columnId: source.droppableId, taskId, oldIndex, newIndex}));
         }
-        
-        setDragging(false);
     }
 
     const DoneModal = () => {
@@ -97,11 +90,10 @@ export const TasksPage = () => {
                         <p onClick={() => setShowModal(true)} className={styles.addTask}><img src={IconsEnum.ADD_ICON} alt='add'/>Add new task</p>
                     </div>
                     <DragDropContext
-                        onDragStart={() => setDragging(true)}
                         onDragEnd={onDragEnd}>
                         <div className={styles.tasksColumnWrapper}>
                             {columns.map(column => {
-                                return <TasksColumn key={column.id} type={column.id} isDragging={isDragging} tasks={column.tasks}/>
+                                return <TasksColumn key={column.id} type={column.id} tasks={column.tasks}/>
                             })}
                         </div>
                     </DragDropContext>

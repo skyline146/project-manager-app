@@ -8,13 +8,11 @@
     justify-content: center;
     flex-direction: column;
     > h1 {
-        font-family: $font;
         color: $font-color;
         font-size: 100px;
     }
     > p {
         margin-top: 0px;
-        font-family: $font;
         color: $font-color;
         font-size: 40px;
     }
@@ -23,7 +21,6 @@
         > p {
             position: relative;
             margin-top: 20px;
-            font-family: $font;
             color: rgb(237, 171, 18);
             font-size: 60px;
             &::after {

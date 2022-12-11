@@ -12,6 +12,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
 ::-moz-selection { /* Code for Firefox */
   color: black;
   background: rgb(237, 171, 18);

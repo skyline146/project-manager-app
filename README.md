@@ -10,7 +10,7 @@ Page that shows all your projects. After choosing any project you will be redire
 
 Page that have 3 columns: Queue, Development and Done. There you can create new task and move it in between columns and change order.
 
-### Used technologies and libraries
+### Used technologies and libraries:
 
 `TypeScript`
 `React`
@@ -24,4 +24,4 @@ For now data stores in local storage. But in future there will be login page wit
 
 ### v1.0
 
-Added projects slice with redux, creating and deleting projects and tasks. All data saves in local storage.
+Added projects slice with redux. There is opportunity to create and delete projects and tasks. All data saves in local storage.

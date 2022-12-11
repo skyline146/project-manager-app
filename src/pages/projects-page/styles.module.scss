@@ -39,7 +39,6 @@
 }
 
 .projectsCount {
-    font-family: $font;
     font-size: 36px;
     margin-bottom: 30px;
     display: flex;
@@ -105,7 +104,6 @@
     > p {
         user-select: none;
         margin: 10px 0 10px 0;
-        font-family: $font;
         color: $font-color;
         font-size: 36px;
     }

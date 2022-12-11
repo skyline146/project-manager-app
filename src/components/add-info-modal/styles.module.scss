@@ -53,7 +53,6 @@
     padding: 0 20px 0 20px;
     > p {
         color: $font-color;
-        font-family: $font;
         font-size: 24px;
         text-transform: uppercase;
     }
@@ -96,14 +95,12 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        font-family: $font;
         color: $font-color;
         font-size: 22px;
         padding: 20px 0 0 20px;
         > input {
             color: $font-color;
             background-color: transparent;
-            font-family: $font;
             font-size: 20px;
             width: 400px;
             height: 30px;
@@ -120,7 +117,6 @@
     outline: none;
     padding: 5px 5px 5px 5px;
     min-height: 200px;
-    font-family: $font;
     background-color: $card-background;
     font-size: 18px;
     margin: 15px 15px 0 0;
@@ -135,7 +131,6 @@
     padding-left: 20px;
     > p {
         color: rgb(194, 1, 1);
-        font-family: $font;
         font-size: 20px;
         font-weight: bold;
         margin: 10px 0 0 0;
@@ -148,7 +143,6 @@
     width: 200px;
     height: 50px;
     border-radius: 10px;
-    font-family: $font;
     color: $font-color;
     font-size: 18px;
     background-color: $card-background;

@@ -19,3 +19,9 @@ Page that have 3 columns: Queue, Development and Done. There you can create new 
 `React beautiful drag-n-drop`
 
 For now data stores in local storage. But in future there will be login page with firebase.
+
+## Updates log:
+
+### v1.0
+
+Added projects slice with redux, creating and deleting projects and tasks. All data saves in local storage.

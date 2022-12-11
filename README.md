@@ -33,3 +33,7 @@ Added column highlight when dragging tasks.
 ### v1.2
 
 Updated projects interface, added columns in projects slice.
+
+### v1.3
+
+Added opportunity to change tasks order in column.

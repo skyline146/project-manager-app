@@ -9,10 +9,11 @@ import styles from './styles.module.scss';
 
 interface ITaskBoxProps {
     index: number,
-    task: TaskInterface
+    task: TaskInterface,
+    status: string
 }
 
-export const TaskBox = ({index, task}:ITaskBoxProps) => {
+export const TaskBox = ({index, task, status}:ITaskBoxProps) => {
     const { projectId } = useParams();
     const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export const TaskBox = ({index, task}:ITaskBoxProps) => {
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}>
                     <div className={styles.deleteButtonWrapper}>
-                        <span className={styles.deleteButton} onClick={() => dispatch(deleteTask({projectId, taskId: task.id}))} data-title='Delete task'><img src={IconsEnum.DELETE_ICON} alt='delete'/></span>
+                        <span className={styles.deleteButton} onClick={() => dispatch(deleteTask({projectId, columnId: status, taskId: task.id}))} data-title='Delete task'><img src={IconsEnum.DELETE_ICON} alt='delete'/></span>
                     </div>
                     <div className={styles.taskHeader}>
                         <p>{task.title}</p>

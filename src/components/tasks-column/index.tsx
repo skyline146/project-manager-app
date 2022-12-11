@@ -47,7 +47,8 @@ export const TasksColumn = ({type, tasks}:ITasksColumnProps) => {
                             return (
                                     <TaskBox
                                         key={task.id}
-                                        index={index} 
+                                        index={index}
+                                        status={type}
                                         task={task}/>
                             )
                         })}

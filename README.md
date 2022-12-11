@@ -29,3 +29,7 @@ Added projects slice with redux. There is opportunity to create and delete proje
 ### v1.1
 
 Added column highlight when dragging tasks.
+
+### v1.2
+
+Updated projects interface, added columns in projects slice.

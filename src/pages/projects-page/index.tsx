@@ -27,7 +27,20 @@ export const ProjectsPage = () => {
             description: projectDescr,
             status: 'progress',
             createdAt: [...new Date().toLocaleString().split(', ')],
-            tasks: [],
+            columns: {
+                queue: {
+                  id: 'queue',
+                  tasks: []
+                },
+                development: {
+                    id: 'development',
+                    tasks: []
+                },
+                done: {
+                    id: 'done',
+                    tasks: []
+                },
+            }
         }
 
         dispatch(addProject(newProject));

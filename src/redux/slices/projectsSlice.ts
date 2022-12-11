@@ -6,31 +6,32 @@ export interface ProjectsState {
   projects: ProjectInterface [],
 }
 
-// columns: [
+// projects: [
 //   {
-//     id: 'queue',
-//     tasks: []
-//   },
-//   {
-//     id: 'development',
-//     tasks: []
-//   },
-//   {
-//     id: 'done',
-//     tasks: []
-//   },
+//     id: "",
+//     title: "",
+//     description: "",
+//     status: "",
+//     createdAt: ["", ""],
+//     columns: {
+//       'queue': {
+//         id: 'queue',
+//         tasks: []
+//       },
+//       'development': {
+//         id: 'development',
+//         tasks: []
+//       },
+//       'done': {
+//         id: 'done',
+//         tasks: []
+//       },
+//     }
+//   }
 // ],
+
 const initialState: ProjectsState = {
-    projects: [
-      {
-        id: "",
-        title: "",
-        description: "",
-        status: "",
-        createdAt: ["", ""],
-        tasks: []
-      }
-    ],
+    projects: [],
 }
 
 const updateLocalStorage = (projects: ProjectInterface[]) => {
@@ -41,9 +42,8 @@ export const projectsSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
-    deleteProject: (state, action: PayloadAction<string>) => {
-      state.projects = state.projects.filter(project => project.id !== action.payload);
-      updateLocalStorage(state.projects);
+    loadProjects: (state, action: PayloadAction<ProjectInterface[]>) => {
+      state.projects = action.payload;
     },
 
     addProject: (state, action: PayloadAction<ProjectInterface>) => {
@@ -51,26 +51,28 @@ export const projectsSlice = createSlice({
       updateLocalStorage(state.projects);
     },
 
-    loadProjects: (state, action: PayloadAction<ProjectInterface[]>) => {
-      state.projects = action.payload;
+    deleteProject: (state, action: PayloadAction<string>) => {
+      state.projects = state.projects.filter(project => project.id !== action.payload);
+      updateLocalStorage(state.projects);
     },
 
     addTask: (state, action: PayloadAction<{projectId: string | undefined, task: TaskInterface}>) => {
-      state.projects.map(project => (project.id === action.payload.projectId) ? project.tasks.push(action.payload.task) : project);
+      state.projects.map(project => (project.id === action.payload.projectId) ? project.columns['queue'].tasks.push(action.payload.task) : project);
 
       state.projects.map(project => project.id === action.payload.projectId ? project.status = 'progress' : project);
 
       updateLocalStorage(state.projects);
     },
 
-    deleteTask: (state, action: PayloadAction<{projectId: string | undefined, taskId: string}>) => {
-      // state.projects.map(item => (item.id === action.payload.projectId) ? item.tasks.filter(task => task.id !== action.payload.taskId) : item);
-      const currentProject = state.projects.filter(project => project.id === action.payload.projectId)[0];
+    deleteTask: (state, action: PayloadAction<{projectId: string | undefined, columnId: string, taskId: string}>) => {
+      const {projectId, columnId, taskId} = action.payload;
+      
+      const currentProject = state.projects.filter(project => project.id === projectId)[0];
 
       //delete task in project
-      currentProject.tasks = currentProject.tasks.filter(task => task.id !== action.payload.taskId);
+      currentProject.columns[columnId].tasks = currentProject.columns[columnId].tasks.filter(task => task.id !== taskId);
 
-      if (currentProject.tasks.length === 0) {
+      if (currentProject.columns['queue'].tasks.length === 0 && currentProject.columns['development'].tasks.length === 0 && currentProject.columns['done'].tasks.length === 0) {
         currentProject.status = 'progress';
       }
 
@@ -78,20 +80,21 @@ export const projectsSlice = createSlice({
     },
 
     updateTaskStatus: (state, action: PayloadAction<{projectId: string | undefined, taskId: string, newStatus: string, newIndex?: number}>) => {
+
+      const {projectId, taskId, newStatus, newIndex} = action.payload;
       
-      const currentProject = state.projects.filter(project => project.id === action.payload.projectId)[0];
-      
+      const currentProject = state.projects.filter(project => project.id === projectId)[0];
       
       //update task status
-      currentProject.tasks.map(task => task.id === action.payload.taskId ? task.status = action.payload.newStatus : task);
+      
 
       let doneTasks = 0;
 
       //counting of done tasks
-      currentProject.tasks.map(task => task.status === 'done' ? doneTasks++ : doneTasks);
+      // currentProject.tasks.map(task => task.status === 'done' ? doneTasks++ : doneTasks);
       
       //check if all tasks in project have done
-      (currentProject.tasks.length === doneTasks) ? currentProject.status = 'done' : currentProject.status = 'progress';
+      // (currentProject.tasks.length === doneTasks) ? currentProject.status = 'done' : currentProject.status = 'progress';
 
       updateLocalStorage(state.projects);
     }
@@ -104,8 +107,8 @@ export const {
   addProject, 
   loadProjects, 
   addTask, 
-  deleteTask, 
-  updateTaskStatus 
+  deleteTask,
+  updateTaskStatus
 } = projectsSlice.actions
 
 export default projectsSlice.reducer

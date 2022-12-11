@@ -2,7 +2,6 @@ export interface TaskInterface {
     id: string,
     title: string,
     description: string,
-    status: string,
     createdAt: string [],
 }
 
@@ -11,13 +10,18 @@ export interface ColumnInterface {
     tasks: TaskInterface [],
 }
 
+
+export interface ColumnsInterface {
+    [key: string]: ColumnInterface
+}
+
 export interface ProjectInterface {
     id: string,
     title: string,
     description: string,
     status: string,
     createdAt: string [],
-    tasks: TaskInterface [],
+    columns: ColumnsInterface 
 }
 
 export interface RouteInterface {

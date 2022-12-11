@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 import type { RootState } from '../../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addTask, updateTaskStatus } from '../../redux/slices/projectsSlice';
+import { addTask, updateTaskStatus, updateTasksOrder } from '../../redux/slices/projectsSlice';
 
 import { TaskInterface } from '../../ts';
 import { stylesJoint } from '../../helpers/utils';
@@ -58,8 +58,11 @@ export const TasksPage = () => {
         const oldIndex: number = source.index;
         const newIndex: number = destination.index;
 
-       
-        dispatch(updateTaskStatus({projectId, taskId, newStatus, newIndex}));
+       if (oldStatus === newStatus) {
+            dispatch(updateTasksOrder({projectId, taskId, columnId: oldStatus, oldIndex, newIndex}));
+       } else {
+            dispatch(updateTaskStatus({projectId, taskId, oldStatus, newStatus, oldIndex, newIndex}));
+       }
         
     }
 

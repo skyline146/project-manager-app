@@ -79,9 +79,9 @@ export const projectsSlice = createSlice({
       updateLocalStorage(state.projects);
     },
 
-    updateTaskStatus: (state, action: PayloadAction<{projectId: string | undefined, taskId: string, newStatus: string, newIndex?: number}>) => {
+    updateTaskStatus: (state, action: PayloadAction<{projectId: string | undefined, taskId: string, oldStatus: string, newStatus: string, oldIndex: number, newIndex: number}>) => {
 
-      const {projectId, taskId, newStatus, newIndex} = action.payload;
+      const {projectId, taskId, oldStatus, newStatus, oldIndex, newIndex} = action.payload;
       
       const currentProject = state.projects.filter(project => project.id === projectId)[0];
       
@@ -97,7 +97,21 @@ export const projectsSlice = createSlice({
       // (currentProject.tasks.length === doneTasks) ? currentProject.status = 'done' : currentProject.status = 'progress';
 
       updateLocalStorage(state.projects);
-    }
+    },
+
+    updateTasksOrder: (state, action: PayloadAction<{projectId: string | undefined, taskId: string, columnId: string, oldIndex: number, newIndex: number}>) => {
+
+      const {projectId, taskId, columnId, oldIndex, newIndex} = action.payload;
+      
+      const currentProject = state.projects.filter(project => project.id === projectId)[0];
+      const task = currentProject.columns[columnId].tasks.filter(task => task.id === taskId)[0];
+      
+      //update tasks order in column
+      currentProject.columns[columnId].tasks.splice(oldIndex, 1);
+      currentProject.columns[columnId].tasks.splice(newIndex, 0, task);
+
+      updateLocalStorage(state.projects);
+    },
   },
 })
 
@@ -108,7 +122,8 @@ export const {
   loadProjects, 
   addTask, 
   deleteTask,
-  updateTaskStatus
+  updateTaskStatus,
+  updateTasksOrder
 } = projectsSlice.actions
 
 export default projectsSlice.reducer

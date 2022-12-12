@@ -60,31 +60,29 @@
     &:last-of-type {
         // width: 400px;
         color: rgb(237, 171, 18);
-        transition: 0.4s;
+        transition: 0.3s;
         border-radius: 20px;
         padding: 5px 10px;
         position: relative;
         &::after {
             content: "";
             position: absolute;
-            left: 50%;
+            right: 0;
             width: 0;
-            height: 2px;
-            border-radius: 50px;
-            background-color: rgb(0, 0, 0);
+            height: 3px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, rgb(255, 157, 0), rgb(255, 234, 0));
             bottom: -4px;
-            transition: 0.4s;
-            opacity: 1;
+            transition: 0.3s;
         }
         &:hover {
-            background-color:rgb(237, 171, 18);
             cursor: pointer;
-            color:black;
+            background: linear-gradient(90deg, rgb(255, 157, 0), rgb(255, 234, 0));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             &::after {
+                width: 100%;
                 left: 0;
-                background-color: rgb(237, 171, 18);
-                width: 0;
-                opacity: 1;
             }
         }
     }

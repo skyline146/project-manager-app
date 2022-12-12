@@ -1,17 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import type { RootState } from '../../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addTask, updateTaskStatus, updateTasksOrder } from '../../redux/slices/projectsSlice';
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 import { TaskInterface } from '../../ts';
 import { stylesJoint } from '../../helpers/utils';
 
 import { TasksColumn, AddInfoModal } from '../../components';
 import { ErrorPage } from '../error-page';
-import { IconsEnum } from '../../helpers/themes';
 import styles from './styles.module.scss';
 
 export const TasksPage = () => {
@@ -23,16 +23,6 @@ export const TasksPage = () => {
     const columnOrder = ['queue', 'development', 'done'];
 
     const dispatch = useDispatch();
-
-    // dispatch(loadColumnData(tasks));
-
-    useEffect(() => {
-        if (!project) {
-            return;
-        }
-       
-        //eslint-disable-next-line
-    }, [columns]);
 
     function addProjectTask (title: string, description: string) {
         const newTask: TaskInterface = {
@@ -48,15 +38,16 @@ export const TasksPage = () => {
     const onDragEnd = (result: any) => {
         const { destination, draggableId, source } = result;
 
-        if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
-            return;
-        }
-
         const taskId: string = draggableId;
         const oldStatus: string = source.droppableId;
         const newStatus: string = destination.droppableId;
         const oldIndex: number = source.index;
         const newIndex: number = destination.index;
+
+        if (!destination || (oldStatus === newStatus && oldIndex === newIndex)) {
+            return;
+        }
+
 
        if (oldStatus === newStatus) {
             dispatch(updateTasksOrder({projectId, taskId, columnId: oldStatus, oldIndex, newIndex}));
@@ -88,7 +79,7 @@ export const TasksPage = () => {
                             </div>
                             <p className={styles.projectTitle}>{project.title}</p>
                         </div>
-                        <p onClick={() => setShowModal(true)} className={styles.addTask}><img src={IconsEnum.ADD_ICON} alt='add'/>Add new task</p>
+                        <p onClick={() => setShowModal(true)} className={styles.addTask}><IoIosAddCircleOutline/>Add new task</p>
                     </div>
                     <DragDropContext
                         onDragEnd={onDragEnd}>

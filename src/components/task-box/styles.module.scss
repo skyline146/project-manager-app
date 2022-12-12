@@ -11,7 +11,6 @@
     min-height: 200px;
     border-radius: 20px;
     padding: 20px 20px 10px 20px;
-    animation: task-render 0.3s;
     &:hover {
         cursor: pointer;
         box-shadow: 0px 0px 15px $box-shadow;
@@ -97,11 +96,6 @@
         margin-bottom: 0;
         text-align: left;
     }
-}
-
-@keyframes task-render {
-    0% {transform: scale(0.95); opacity: 0;}
-    100% {transform: scale(1); opacity: 1;}
 }
 
 @keyframes show-button-title {

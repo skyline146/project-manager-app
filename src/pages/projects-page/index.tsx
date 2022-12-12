@@ -7,6 +7,7 @@ import { addProject } from '../../redux/slices/projectsSlice';
 import { ProjectInterface } from '../../ts';
 import { AllProjects, AddInfoModal } from '../../components';
 
+import { IoIosAddCircleOutline } from "react-icons/io";
 import { IconsEnum } from '../../helpers/themes';
 import styles from './styles.module.scss';
 import './styles.module.scss';
@@ -58,7 +59,7 @@ export const ProjectsPage = () => {
             <section className={styles.rootWrapper}>
                 <div className={styles.header}>
                     <p className={styles.projectsCount}>You have <span>{`${projects.length}`}</span> active {projects.length === 1 ? 'project' : 'projects'}.</p>
-                    <p onClick={() => setShowModal(true)} className={styles.projectsCount}><img src={IconsEnum.ADD_ICON} alt='add'/>Add new project</p>
+                    <p onClick={() => setShowModal(true)} className={styles.projectsCount}><IoIosAddCircleOutline/>Add new project</p>
                 </div>
                 {
                     projects.length === 0 ? 

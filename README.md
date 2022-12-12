@@ -1,6 +1,6 @@
 # Project Manager Web App
 
-## You can try it here: [*click*](https://skyline146.github.io/){target="_blank"}
+## You can try it here: [Web App](https://skyline146.github.io/?target=_blank)
 
 ## Application has two pages:
 

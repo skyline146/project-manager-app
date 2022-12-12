@@ -61,6 +61,8 @@
 .addTask {
     color: rgb(237, 171, 18);
     font-size: 36px;
+    display: flex;
+    align-items: center;
     transition: 0.3s;
     border-radius: 20px;
     padding: 5px 10px;

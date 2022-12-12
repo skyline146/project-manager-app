@@ -65,12 +65,9 @@ export const TasksPage = () => {
         )
     }
 
-    return (
-        <div style={{height: '100%'}}>
-            {project?.status === 'done' ? <DoneModal/> : null}
-            {showModal ? <AddInfoModal type='task' closeModal={() => setShowModal(false)} addInfo={(title, descr) => addProjectTask(title, descr)}/> : null}
-            {
-                project ?
+    let content: JSX.Element = <></>;
+    if(project) {
+        content = (
                 <section className={styles.rootWrapper}> 
                     <div className={styles.header}>
                         <div className={styles.projectTitleWrapper}>
@@ -92,9 +89,17 @@ export const TasksPage = () => {
                             })}
                         </div>
                     </DragDropContext>
-                </section> :
-                <ErrorPage type='Project is not exist!'/>
-            }
+                </section>
+            )
+    } else {
+        content = <ErrorPage type='Project is not exist!'/>
+    }
+
+    return (
+        <div style={{height: '100%'}}>
+            {project?.status === 'done' ? <DoneModal/> : null}
+            {showModal ? <AddInfoModal type='task' closeModal={() => setShowModal(false)} addInfo={(title, descr) => addProjectTask(title, descr)}/> : null}
+            {content}
         </div>
     )
 }

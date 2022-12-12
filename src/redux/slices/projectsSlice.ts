@@ -77,8 +77,11 @@ export const projectsSlice = createSlice({
       currentProject.columns[newStatus].tasks.splice(newIndex, 0, task);
 
       //check if all tasks in project have done
-      (currentProject.columns['done'].tasks.length && currentProject.columns['queue'].tasks.length === 0 && currentProject.columns['development'].tasks.length === 0) ? 
-      currentProject.status = 'done' : currentProject.status = 'progress';
+      if (currentProject.columns['done'].tasks.length && currentProject.columns['queue'].tasks.length === 0 && currentProject.columns['development'].tasks.length === 0) {
+        currentProject.status = 'done';
+      } else {
+        currentProject.status = 'progress';
+      }
 
       updateLocalStorage(state.projects);
     },

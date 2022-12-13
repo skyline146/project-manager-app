@@ -46,12 +46,6 @@ export const ProjectsPage = () => {
         dispatch(addProject(newProject));
     }
 
-    if(showModal) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
-    }
-
     let content: JSX.Element = <React.Fragment/>;
 
     if(projects.length === 0) {
@@ -68,7 +62,7 @@ export const ProjectsPage = () => {
 
     return (
         <div style={{height: '100%'}}>
-            {<AddInfoModal type='project' isShow={showModal} closeModal={() => setShowModal(false)} addInfo={(title:string, descr:string) => addNewProject(title, descr)}/>}
+            <AddInfoModal type='project' isShow={showModal} closeModal={() => setShowModal(false)} addInfo={(title:string, descr:string) => addNewProject(title, descr)}/>
             <section className={styles.rootWrapper}>
                 <div className={styles.header}>
                     <p className={styles.projectsCount}>You have <span>{`${projects.length}`}</span> active {projects.length === 1 ? 'project' : 'projects'}.</p>

@@ -98,7 +98,7 @@ export const TasksPage = () => {
     return (
         <div style={{height: '100%'}}>
             {project?.status === 'done' ? <DoneModal/> : null}
-            {showModal ? <AddInfoModal type='task' closeModal={() => setShowModal(false)} addInfo={(title, descr) => addProjectTask(title, descr)}/> : null}
+            <AddInfoModal type='task' isShow={showModal} closeModal={() => setShowModal(false)} addInfo={(title, descr) => addProjectTask(title, descr)}/>
             {content}
         </div>
     )

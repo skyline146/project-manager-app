@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
 import { IconsEnum } from '../../helpers/themes';
 import styles from './styles.module.scss';
@@ -22,6 +22,11 @@ export const AddInfoModal = ({closeModal, addInfo, type, knownTitle, knownDescr,
     const [title, setTitle] = useState<string>(knownTitle ?? '');
     const [descr, setDescr] = useState<string>(knownDescr ?? '');
     const [errorMessages, setErrorMessages] = useState<ErrorMessageInterface>({descrError: '', titleError: ''});
+    const inputRef = useRef<any>(null);
+
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
 
     const handleSubmitForm = (event: any) => {
         event.preventDefault();
@@ -40,6 +45,12 @@ export const AddInfoModal = ({closeModal, addInfo, type, knownTitle, knownDescr,
         }
     }
 
+    if(isShow) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+
     return (
         <div style={{display: isShow ? 'flex' : 'none'}} className={styles.modalWrapper}  
             onKeyDown={(event) => event.key === 'Escape' ? closeModal() : null}
@@ -54,7 +65,7 @@ export const AddInfoModal = ({closeModal, addInfo, type, knownTitle, knownDescr,
                 <form className={styles.addForm} onSubmit={(e) => handleSubmitForm(e)}>
                     <label>
                         {type === 'project' ? 'Project' : 'Task'} title:
-                        <input maxLength={25} autoFocus type='text' onChange={(e) => setTitle(e.target.value)} value={title}/>
+                        <input id='title' maxLength={25} ref={inputRef} type='text' onChange={(e) => setTitle(e.target.value)} value={title}/>
                     </label>
                     <div className={styles.errorMessageBlock}>
                         <p>{errorMessages.titleError ? errorMessages.titleError : null}</p>
@@ -63,7 +74,7 @@ export const AddInfoModal = ({closeModal, addInfo, type, knownTitle, knownDescr,
                         {type === 'project' ? 'Project' : 'Task'} description:
                         <textarea 
                             maxLength={800} 
-                            className={styles.descrBox} 
+                            className={styles.descrBox}
                             onChange={(e) => setDescr(e.target.value)}
                             value={descr}>
                         </textarea>

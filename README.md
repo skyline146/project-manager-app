@@ -1,6 +1,6 @@
 # Project Manager Web App
 
-## You can try it here: https://skyline146.github.io/
+## You can try it here: https://tasks-project-manager.vercel.app/
 
 ## Application has two pages:
 
@@ -24,7 +24,7 @@ For now data stores in local storage. But in future there will be login page wit
 
 ## Updates log:
 
-### v1.0
+## v1.0
 
 Added projects slice with redux. There is opportunity to create and delete projects and tasks. All data saves in local storage.
 
@@ -43,3 +43,7 @@ Added opportunity to change tasks order in column.
 ### v1.4
 
 Added opportunity to move task status between columns and project status check.
+
+## v2.0
+
+Added mixins in scss, modal overflow scroll and project moved to Vercel.

@@ -8,7 +8,6 @@ import { ProjectInterface } from '../../ts';
 import { AllProjects, AddInfoModal } from '../../components';
 
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { IconsEnum } from '../../helpers/themes';
 import styles from './styles.module.scss';
 import './styles.module.scss';
 
@@ -53,22 +52,29 @@ export const ProjectsPage = () => {
         document.body.style.overflow = 'auto';
     }
 
+    let content: JSX.Element = <React.Fragment/>;
+
+    if(projects.length === 0) {
+        content = (
+            <div className={styles.placeholderWrapper} onClick={() => setShowModal(true)}>
+                <p>You don't have projects :( </p>
+                <p>Click to create now!</p>
+            </div>
+        )
+        
+    } else {
+        content = <AllProjects/>
+    }
+
     return (
         <div style={{height: '100%'}}>
-            {showModal ? <AddInfoModal type='project' closeModal={() => setShowModal(false)} addInfo={(title:string, descr:string) => addNewProject(title, descr)}/> : null}
+            {<AddInfoModal type='project' isShow={showModal} closeModal={() => setShowModal(false)} addInfo={(title:string, descr:string) => addNewProject(title, descr)}/>}
             <section className={styles.rootWrapper}>
                 <div className={styles.header}>
                     <p className={styles.projectsCount}>You have <span>{`${projects.length}`}</span> active {projects.length === 1 ? 'project' : 'projects'}.</p>
-                    <p onClick={() => setShowModal(true)} className={styles.projectsCount}><IoIosAddCircleOutline/>Add new project</p>
+                    <p onClick={() => setShowModal(true)} className={styles.projectsCount}><IoIosAddCircleOutline style={{color: 'rgb(237, 171, 18)'}}/>Add new project</p>
                 </div>
-                {
-                    projects.length === 0 ? 
-                    <div className={styles.placeholderWrapper} onClick={() => setShowModal(true)}>
-                        <p>You don't have projects :( </p>
-                        <p>Click to create now!</p>
-                    </div> : 
-                    <AllProjects/>
-                }
+                {content}
             </section>
         </div>
     )

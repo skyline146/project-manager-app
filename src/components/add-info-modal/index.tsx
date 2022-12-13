@@ -22,7 +22,6 @@ export const AddInfoModal = ({closeModal, addInfo, type, knownTitle, knownDescr,
     const [title, setTitle] = useState<string>(knownTitle ?? '');
     const [descr, setDescr] = useState<string>(knownDescr ?? '');
     const [errorMessages, setErrorMessages] = useState<ErrorMessageInterface>({descrError: '', titleError: ''});
-    // const [modalTransition, setModalTransition] = useState<boolean>(false);
 
     const handleSubmitForm = (event: any) => {
         event.preventDefault();
@@ -30,6 +29,8 @@ export const AddInfoModal = ({closeModal, addInfo, type, knownTitle, knownDescr,
         if (title !== '' && title.trim()) {
             if (descr !== '' && descr.trim()) {
                 addInfo(title, descr);
+                setTitle('');
+                setDescr('');
                 closeModal();
             } else {
                 setErrorMessages({descrError: `Description can't be empty!`});
@@ -40,7 +41,7 @@ export const AddInfoModal = ({closeModal, addInfo, type, knownTitle, knownDescr,
     }
 
     return (
-        <div className={styles.modalWrapper}  
+        <div style={{display: isShow ? 'flex' : 'none'}} className={styles.modalWrapper}  
             onKeyDown={(event) => event.key === 'Escape' ? closeModal() : null}
             onClick={closeModal}>
             <div className={styles.modalWindow} onClick={(e) => e.stopPropagation()}>

@@ -1,4 +1,4 @@
-@import '../../helpers/style/variables.scss';
+@import '../../helpers/style/index.scss';
 
 .rootWrapper {
     // background-color: red;
@@ -59,36 +59,7 @@
 }
 
 .addTask {
-    color: rgb(237, 171, 18);
-    font-size: 36px;
-    display: flex;
-    align-items: center;
-    transition: 0.3s;
-    border-radius: 20px;
-    padding: 5px 10px;
-    position: relative;
-
-    &::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        width: 0;
-        height: 3px;
-        border-radius: 10px;
-        background: linear-gradient(90deg, rgb(255, 157, 0), rgb(255, 234, 0));
-        bottom: -4px;
-        transition: 0.3s;
-    }
-    &:hover {
-        cursor: pointer;
-        background: linear-gradient(90deg, rgb(255, 157, 0), rgb(255, 234, 0));
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        &::after {
-            width: 100%;
-            left: 0;
-        }
-    }
+    @include animated-button;
 }
 
 .tasksColumnWrapper {

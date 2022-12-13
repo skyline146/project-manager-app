@@ -65,7 +65,7 @@ export const TasksPage = () => {
         )
     }
 
-    let content: JSX.Element = <></>;
+    let content: JSX.Element = <React.Fragment/>;
     if(project) {
         content = (
                 <section className={styles.rootWrapper}> 
@@ -76,7 +76,7 @@ export const TasksPage = () => {
                             </div>
                             <p className={styles.projectTitle}>{project.title}</p>
                         </div>
-                        <p onClick={() => setShowModal(true)} className={styles.addTask}><IoIosAddCircleOutline/>Add new task</p>
+                        <p onClick={() => setShowModal(true)} className={styles.addTask}><IoIosAddCircleOutline style={{color: 'rgb(237, 171, 18)'}}/>Add new task</p>
                     </div>
                     <DragDropContext
                         onDragEnd={onDragEnd}>

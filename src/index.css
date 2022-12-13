@@ -2,8 +2,9 @@
 
 body {
   margin: 0;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
+  display: block;
   background-color: rgb(39, 39, 39);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

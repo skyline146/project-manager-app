@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { useDispatch } from 'react-redux';
 import { loadProjects } from './redux/slices/projectsSlice';
 
@@ -9,6 +10,7 @@ import './App.css';
 
 function App() {
 
+  const location = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,15 +19,21 @@ function App() {
 
   return (
     <div className="App">
-      {/* <RouterProvider router={router}/> */}
-      <Routes>
-        {routes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={route.element}/>
-        ))}
-      </Routes>
+      <TransitionGroup>
+        <CSSTransition
+          key={location.pathname}
+          classNames='fade'
+          timeout={300}>
+            <Routes location={location}>
+              {routes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={route.element}/>
+              ))}
+            </Routes>
+        </CSSTransition>
+      </TransitionGroup>
     </div>
   );
 }

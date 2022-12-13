@@ -47,3 +47,7 @@ Added opportunity to move task status between columns and project status check.
 ## v2.0
 
 Added mixins in scss, modal overflow scroll and project moved to Vercel.
+
+### v2.1
+
+Router smooth transition.

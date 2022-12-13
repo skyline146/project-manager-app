@@ -26,7 +26,7 @@ export const AddInfoModal = ({closeModal, addInfo, type, knownTitle, knownDescr,
 
     useEffect(() => {
         inputRef.current?.focus();
-    }, []);
+    }, [isShow]);
 
     const handleSubmitForm = (event: any) => {
         event.preventDefault();

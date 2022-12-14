@@ -3,7 +3,7 @@
 .modalWrapper {
     position: fixed;
     z-index: 10;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -22,9 +22,23 @@
     animation: show-modal 0.4s;
 }
 
+.showModal {
+    display: flex;
+}
+
+@keyframes wrapper-modal {
+    0% {opacity: 0;}
+    100% {display: flex; opacity: 1;}
+}
+
 @keyframes show-modal {
     0% {transform: scale(0.8); opacity: 0;}
     100% {transform: scale(1); opacity: 1;}
+}
+
+@keyframes hide-modal {
+    0% {transform: scale(1); opacity: 1;}
+    100% {transform: scale(0.8); opacity: 0;}
 }
 
 .modalHeader {
@@ -83,7 +97,7 @@
 }
 
 .descrBox {
-    resize: vertical;
+    resize: none;
     width: 95%;
     outline: none;
     padding: 5px 5px 5px 5px;

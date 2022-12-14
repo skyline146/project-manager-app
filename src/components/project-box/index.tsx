@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteProject } from '../../redux/slices/projectsSlice';
+import { showModal } from '../../redux/slices/modalSlice';
 import { useNavigate } from 'react-router-dom';
 
 import { IconsEnum } from '../../helpers/themes';
@@ -29,11 +30,13 @@ export const ProjectBox = ({title, id, description, status, createdAt}:IProjectB
                     <p className={styles.projectTitle}>{title}</p>
                 </div>
                 <div className={styles.controlButtonsWrapper} onClick={(e) => e.stopPropagation()}>
-                    <span className={styles.controlButton} style={{backgroundColor: 'rgb(221, 168, 108)'}} data-title='Edit project'><img src={IconsEnum.EDIT_ICON} alt='edit'/></span>
+                    <span className={styles.controlButton} onClick={() => dispatch(showModal({type: 'project', action: 'edit', id}))} style={{backgroundColor: 'rgb(221, 168, 108)'}} data-title='Edit project'><img src={IconsEnum.EDIT_ICON} alt='edit'/></span>
                     <span className={styles.controlButton} onClick={() => dispatch(deleteProject(id))} data-title='Delete project'><img src={IconsEnum.DELETE_ICON} alt='delete'/></span>
                 </div>
             </div>
-            <p>{description}</p>
+            <div className={styles.descriptionWrapper}>
+                <p>{description}</p>
+            </div>
             <div className={styles.projectDate}>
                 <p>Created at: {`${createdAt[0]} ${createdAt[1]}`}</p>
             </div>

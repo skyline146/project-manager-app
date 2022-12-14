@@ -32,6 +32,17 @@ export const projectsSlice = createSlice({
       updateLocalStorage(state.projects);
     },
 
+    editProject: (state, action: PayloadAction<{projectId: string, newTitle: string, newDescr: string}>) => {
+      const {projectId, newTitle, newDescr} = action.payload;
+
+      const currentProject = state.projects.filter(project => project.id === projectId)[0];
+
+      currentProject.title = newTitle;
+      currentProject.description = newDescr;
+
+      updateLocalStorage(state.projects);
+    },
+
     addTask: (state, action: PayloadAction<{projectId: string | undefined, task: TaskInterface}>) => {
       state.projects.map(project => (project.id === action.payload.projectId) ? project.columns['queue'].tasks.push(action.payload.task) : project);
 
@@ -105,7 +116,8 @@ export const projectsSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
   deleteProject, 
-  addProject, 
+  addProject,
+  editProject, 
   loadProjects, 
   addTask, 
   deleteTask,

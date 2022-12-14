@@ -51,3 +51,8 @@ Added mixins in scss, modal overflow scroll and project moved to Vercel.
 ### v2.1
 
 Router smooth transition.
+
+### v2.2
+
+Change modal logic for creating projects and tasks, added project edit modal.
+Projects view improvements.

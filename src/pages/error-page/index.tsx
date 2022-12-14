@@ -9,7 +9,7 @@ interface IErrorPageProps {
 export const ErrorPage = ({type}:IErrorPageProps) => {
     // const error = useRouteError();
     // console.error(error);
-
+    
     return (
         <div className={styles.rootWrapper}>
             <h1>Oops!</h1>

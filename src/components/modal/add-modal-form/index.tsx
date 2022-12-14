@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {v4 as uuid} from 'uuid';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 import { addTask, addProject } from '../../../redux/slices/projectsSlice';
 import { hideModal } from '../../../redux/slices/modalSlice';
 
@@ -19,14 +19,14 @@ interface IAddModalFormProps {
     type: string,
 }
 
-export const AddModalForm = ({innerRef, type}:IAddModalFormProps) => {
-    const {projectId} = useParams();
+export const AddModalForm = memo(({innerRef, type}:IAddModalFormProps) => {
+    const projectId = useSelector((state: RootState) => state.modal.id);
     const [title, setTitle] = useState<string>('');
     const [descr, setDescr] = useState<string>('');
     const [errorMessages, setErrorMessages] = useState<ErrorMessageInterface>({descrError: '', titleError: ''});
 
     const dispatch = useDispatch();
-
+    
     const handleSubmitForm = (event: any) => {
         event.preventDefault();
 
@@ -113,4 +113,4 @@ export const AddModalForm = ({innerRef, type}:IAddModalFormProps) => {
             <button className={styles.formButton}>Submit</button>
         </form>
     )
-}
+});

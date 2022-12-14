@@ -3,7 +3,7 @@ import type { RootState } from '../../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { showModal } from '../../redux/slices/modalSlice';
 
-import { AllProjects, Modal } from '../../components';
+import { AllProjects } from '../../components';
 
 import { IoIosAddCircleOutline } from "react-icons/io";
 import styles from './styles.module.scss';
@@ -30,7 +30,6 @@ export const ProjectsPage = () => {
 
     return (
         <div style={{height: '100%'}}>
-            <Modal />
             <section className={styles.rootWrapper}>
                 <div className={styles.header}>
                     <p className={styles.projectsCount}>You have <span>{`${projects.length}`}</span> active {projects.length === 1 ? 'project' : 'projects'}.</p>

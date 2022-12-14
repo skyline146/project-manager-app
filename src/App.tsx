@@ -3,6 +3,8 @@ import {Route, Routes, useLocation} from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { useDispatch } from 'react-redux';
 import { loadProjects } from './redux/slices/projectsSlice';
+import { hideModal } from './redux/slices/modalSlice';
+import { Modal } from './components';
 
 import { routes } from './routes';
 
@@ -17,8 +19,13 @@ function App() {
     dispatch(loadProjects(JSON.parse(localStorage.getItem('projects') || JSON.stringify([]))));
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(hideModal());
+  }, [dispatch, location.pathname]);
+
   return (
     <div className="App">
+      <Modal/>
       <TransitionGroup>
         <CSSTransition
           key={location.pathname}

@@ -56,3 +56,7 @@ Router smooth transition.
 
 Change modal logic for creating projects and tasks, added project edit modal.
 Projects view improvements.
+
+### v2.3
+
+Optimization improvements, bug fixes. Modal added out of Routes, so it can be rendered everywhere.

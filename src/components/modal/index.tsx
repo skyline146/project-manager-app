@@ -37,8 +37,10 @@ export const Modal = () => {
     const renderForm = () => {
         if (action === 'add') {
             return <AddModalForm innerRef={inputRef} type={type}/>
-        } else {
+        } else if (action === 'edit') {
             return <EditModalForm innerRef={inputRef} type={type}/>
+        } else {
+            return;
         }
     }
 

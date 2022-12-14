@@ -1,3 +1,5 @@
+import React, {memo} from 'react';
+
 import ProjectForm from './project-form';
 
 
@@ -6,7 +8,7 @@ interface EditModalFormProps {
     type: string,
 }
 
-export const EditModalForm = ({innerRef, type}:EditModalFormProps) => {
+export const EditModalForm = memo(({innerRef, type}:EditModalFormProps) => {
 
     const renderForm = () => {
         if (type === 'project') {
@@ -19,4 +21,4 @@ export const EditModalForm = ({innerRef, type}:EditModalFormProps) => {
     return (
         renderForm()
     )
-}
+});

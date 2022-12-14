@@ -41,7 +41,7 @@ export const TasksColumn = ({type, tasks}:ITasksColumnProps) => {
                     </div>
                     <div 
                         className={snapshot.isDraggingOver ? stylesJoint(styles.tasksTable, styles.tasksTableDrag) : styles.tasksTable}
-                        ref={provided.innerRef} 
+                        ref={provided.innerRef}
                         {...provided.droppableProps}>
                         {tasks?.map((task, index) => {
                             return (

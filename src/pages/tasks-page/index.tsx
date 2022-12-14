@@ -38,13 +38,17 @@ export const TasksPage = () => {
     const onDragEnd = (result: any) => {
         const { destination, draggableId, source } = result;
 
+        if(!destination) {
+            return;
+        }
+
         const taskId: string = draggableId,
               oldStatus: string = source.droppableId,
               newStatus: string = destination.droppableId,
               oldIndex: number = source.index,
               newIndex: number = destination.index;
 
-        if (!destination || (oldStatus === newStatus && oldIndex === newIndex)) {
+        if (oldStatus === newStatus && oldIndex === newIndex) {
             return;
         }
 

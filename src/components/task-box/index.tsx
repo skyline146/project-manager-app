@@ -8,25 +8,50 @@ import { IconsEnum } from '../../helpers/themes';
 import styles from './styles.module.scss';
 
 interface ITaskBoxProps {
-    index: number,
-    task: TaskInterface,
-    status: string
+    index: number;
+    task: TaskInterface;
+    status: string;
 }
 
-export const TaskBox = ({index, task, status}:ITaskBoxProps) => {
+export const TaskBox = ({ index, task, status }: ITaskBoxProps) => {
     const { projectId } = useParams();
     const dispatch = useDispatch();
 
+    let borderColor = '';
+
+    switch (status) {
+        case 'development': {
+            borderColor = 'rgb(237, 171, 18)';
+            break;
+        }
+        case 'done': {
+            borderColor = 'rgb(23, 163, 10)';
+            break;
+        }
+        default: {
+            borderColor = '#adadad';
+            break;
+        }
+    }
+
     return (
         <Draggable draggableId={task.id} index={index}>
-            {(provided) => (
-                <div 
-                    className={styles.rootWrapper} 
+            {provided => (
+                <div
+                    className={styles.rootWrapper}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    ref={provided.innerRef}>
+                    ref={provided.innerRef}
+                >
+                    <div className={styles.colorBorder} style={{ backgroundColor: borderColor }}></div>
                     <div className={styles.deleteButtonWrapper}>
-                        <span className={styles.deleteButton} onClick={() => dispatch(deleteTask({projectId, columnId: status, taskId: task.id}))} data-title='Delete task'><img src={IconsEnum.DELETE_ICON} alt='delete'/></span>
+                        <span
+                            className={styles.deleteButton}
+                            onClick={() => dispatch(deleteTask({ projectId, columnId: status, taskId: task.id }))}
+                            data-title="Delete task"
+                        >
+                            <img src={IconsEnum.DELETE_ICON} alt="delete" />
+                        </span>
                     </div>
                     <div className={styles.taskHeader}>
                         <p>{task.title}</p>
@@ -38,5 +63,5 @@ export const TaskBox = ({index, task, status}:ITaskBoxProps) => {
                 </div>
             )}
         </Draggable>
-    )
-}
+    );
+};

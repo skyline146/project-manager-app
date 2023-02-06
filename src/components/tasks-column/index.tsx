@@ -6,14 +6,14 @@ import { stylesJoint } from '../../helpers/utils';
 import styles from './styles.module.scss';
 
 interface ITasksColumnProps {
-    type: string,
-    tasks: TaskInterface [],
+    type: string;
+    tasks: TaskInterface[];
 }
 
-export const TasksColumn = ({type, tasks}:ITasksColumnProps) => {
+export const TasksColumn = ({ type, tasks }: ITasksColumnProps) => {
     let textColor = '';
 
-    switch(type) {
+    switch (type) {
         case 'development': {
             textColor = 'rgb(237, 171, 18)';
             break;
@@ -36,26 +36,25 @@ export const TasksColumn = ({type, tasks}:ITasksColumnProps) => {
                 <div className={styles.rootWrapper}>
                     <div className={styles.tableHeader}>
                         <div>
-                            <p style={{color: textColor}}>{type}</p>
+                            <p style={{ color: textColor }}>{type}</p>
                         </div>
                     </div>
-                    <div 
-                        className={snapshot.isDraggingOver ? stylesJoint(styles.tasksTable, styles.tasksTableDrag) : styles.tasksTable}
+                    <div
+                        className={
+                            snapshot.isDraggingOver
+                                ? stylesJoint(styles.tasksTable, styles.tasksTableDrag)
+                                : styles.tasksTable
+                        }
                         ref={provided.innerRef}
-                        {...provided.droppableProps}>
+                        {...provided.droppableProps}
+                    >
                         {tasks?.map((task, index) => {
-                            return (
-                                    <TaskBox
-                                        key={task.id}
-                                        index={index}
-                                        status={type}
-                                        task={task}/>
-                            )
+                            return <TaskBox key={task.id} index={index} status={type} task={task} />;
                         })}
                         {provided.placeholder}
                     </div>
                 </div>
             )}
         </Droppable>
-    )
-}
+    );
+};

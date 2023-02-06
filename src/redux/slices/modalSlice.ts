@@ -1,26 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface ModalStateInterface {
-    isActive: boolean
-    type: string,
-    action: string,
-    id: string,
+    isActive: boolean;
+    type: string;
+    action: string;
+    id: string;
 }
 
 const initialState: ModalStateInterface = {
     isActive: false,
     type: '',
     action: '',
-    id: ''
-}
+    id: '',
+};
 
 export const modalSlice = createSlice({
     name: 'projects',
     initialState,
     reducers: {
-        showModal: (state, action: PayloadAction<{type: string, action: string, id?: string}>) => {
-            const {type, id} = action.payload;
+        showModal: (state, action: PayloadAction<{ type: string; action: string; id?: string }>) => {
+            const { type, id } = action.payload;
 
             state.isActive = true;
 
@@ -32,12 +32,12 @@ export const modalSlice = createSlice({
             }
         },
 
-        hideModal: (state) => {
+        hideModal: state => {
             state.isActive = false;
-        }
-    }
+        },
+    },
 });
 
 export const { showModal, hideModal } = modalSlice.actions;
 
-export default modalSlice.reducer
+export default modalSlice.reducer;

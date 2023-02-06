@@ -60,3 +60,7 @@ Projects view improvements.
 ### v2.3
 
 Optimization improvements, bug fixes. Modal added out of Routes, so it can be rendered everywhere.
+
+### v2.4
+
+Added colored border for tasks to highlight status.
